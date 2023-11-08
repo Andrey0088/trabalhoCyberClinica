@@ -9,17 +9,28 @@ class Clinica():
     def adicionaPaciente(self, cpf, paciente):
         self._lista_pacientes[cpf] = paciente
 
+
     def obterMedico(self, ID):
         if ID in self._lista_medicos.keys():
             return self._lista_medicos[ID]
         else:
             return "Erro"
 
+
     def obterPaciente(self, CPF):
         if len(self._lista_pacientes) != 0 and CPF in self._lista_pacientes.keys():
             return self._lista_pacientes[CPF]
         else:
             return "Erro"
+        
+
+    def excluirPaciente(self, CPF):
+        if CPF in self._lista_pacientes.keys():
+            del self._lista_pacientes[CPF]
+            return True
+        else:
+            return False
+        
 
     def encaminharPaciente(self, ID):
         if ID in self._lista_medicos.keys():
@@ -63,10 +74,11 @@ class Pessoa():
 
 class Paciente(Clinica, Pessoa):
 
-    def __init__(self, nome, cpf, idade, ID):
+    def __init__(self, nome, cpf, idade, data, ID):
         self._nome = nome
         self._cpf = cpf
         self._idade = idade
+        self._data = data
         self._ID = ID
         self._lista_pacientes = {}
 
@@ -81,6 +93,9 @@ class Paciente(Clinica, Pessoa):
 
     def getID(self):
         return self._ID
+    
+    def getData(self):
+        return self._data
 
 
 class Medico(Clinica, Pessoa):
