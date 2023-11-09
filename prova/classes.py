@@ -1,3 +1,5 @@
+import random
+
 class Clinica():
 
     def __init__(self, nome, endereco, lista_pacientes, lista_medicos):
@@ -5,9 +7,28 @@ class Clinica():
         self._endereco = endereco
         self._lista_pacientes = lista_pacientes
         self._lista_medicos = lista_medicos
+        self._lista_doencas = [ 'Câncer de Mama', 'Leucemia', 'Câncer de Pulmão','Depressão','Transtorno de Ansiedade Generalizada (TAG)', 'Esquizofrenia', 'Fratura de Colles', 'Osteoartrite', 'Tendinite de Aquiles', 'Acne', 'Dermatite Atópica (Eczema)', 'Psoriase', 'Enxaqueca', 'Doenca de Parkinson', 'Epilepsia','Resfriado comum', 'Gripe', 'Infeccao Urinaria' ]
 
     def adicionaPaciente(self, cpf, paciente):
         self._lista_pacientes[cpf] = paciente
+
+    def escolheDoenca(self, especializacao):
+        if especializacao == 'Oncologista':
+            return random.choice(self._lista_doencas[0:2])
+        elif especializacao == 'Psiquiatra':
+            return random.choice(self._lista_doencas[3:5])
+        elif especializacao == 'Ortopedista':
+            return random.choice(self._lista_doencas[6:8])
+        elif especializacao == 'Dermatologista':
+            return random.choice(self._lista_doencas[9:12])
+        elif especializacao == 'Neurologista':
+            return random.choice(self._lista_doencas[13:15])
+        elif especializacao == 'Clinico geral':
+            return random.choice(self._lista_doencas[16:18])
+        else:
+            return "Especialização inválida"
+        
+  
 
 
     def obterMedico(self, ID):
@@ -15,6 +36,7 @@ class Clinica():
             return self._lista_medicos[ID]
         else:
             return "Erro"
+
 
 
     def obterPaciente(self, CPF):
@@ -74,14 +96,24 @@ class Pessoa():
 
 class Paciente(Clinica, Pessoa):
 
-    def __init__(self, nome, cpf, idade, data, ID):
+    def __init__(self, nome, cpf, idade, data,doencas, ID):
         self._nome = nome
         self._cpf = cpf
         self._idade = idade
         self._data = data
         self._ID = ID
+        self._doencas = doencas
         self._lista_pacientes = {}
+        
 
+
+
+    def adicionaDoenca(self, doenca):
+        self._doencas = doenca
+        
+    def getDoencas(self):
+        return self._doencas
+    
     def getNome(self):
         return self._nome
 
